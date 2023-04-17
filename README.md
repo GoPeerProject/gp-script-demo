@@ -51,18 +51,17 @@ To use this script on your website, add this to the index.html file
 # Example
 
 ```
+  useEffect(() => {
+    const gP = window.gP;
+    gP.setEnv("dev");
+    gP.identify({
+      userId: <user-id>,
+      firstName: "John",
+      lastName: "Doe",
+      organizationId: <organization-id>,
+    });
+    gP.show();
 
-     const gP = window.gP;
-      gP.setEnv("dev");
-      gP.identify({
-        userId: <user-id>,
-        firstName: "John",
-        lastName: "Doe",
-        organizationId: <organization-id>,
-      });
-      gP.show();
-
-      gP.setButtonStyles({ bottom: "50px", right: "50px" });
+    gP.setButtonStyles({ bottom: "50px", right: "50px" });
   }, []);
-
 ```
