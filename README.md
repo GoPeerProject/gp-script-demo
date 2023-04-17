@@ -46,3 +46,23 @@ To use this script on your website, add this to the index.html file
 - `gP.setEnv(env)`
   - Sets the environment variable.
   - env (String): The environment variable value.
+  - Default value is "prod".
+
+# Example
+
+```
+
+     const gP = window.gP;
+      gP.setEnv("dev");
+      gP.identify({
+        userId: <user-id>,
+        firstName: "John",
+        lastName: "Doe",
+        organizationId: <organization-id>,
+      });
+      gP.show();
+
+      gP.setButtonStyles({ bottom: "50px", right: "50px" });
+  }, []);
+
+```
