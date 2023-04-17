@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# GoPeer Instant Tutoring Button
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple script to add a GoPeer instant tutoring button on your website. The button, when clicked, will open a new window and take the user to the GoPeer instant tutoring platform.
 
-## Available Scripts
+# Importing Script
 
-In the project directory, you can run:
+To use this script on your website, add this to the index.html file
 
-### `npm start`
+```
+  <script src="https://js.gopeer.org/loader.js" async></script>
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# API
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- gP.identify(userData)
 
-### `npm test`
+  - Sets the user data object.
+  - providedUserData (Object): The user data to be set.
+  - required fields: userId, lastName, firstName, organizationId
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- gP.setOrg(organizationId)
 
-### `npm run build`
+  - Sets the organization ID in the user data object.
+  - organizationId (string): The organization ID provided by GoPeer.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- gP.show()
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  - Displays the user interface element if the user data object and organization Id is provided.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- gP.setPosition(position)
 
-### `npm run eject`
+  - Sets the position of the user interface element.
+  - coordinates (Object): An object containing the bottom and right properties with pixel values.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- gP.setButtonStyles(styles)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  - Applies a set of styles to the button element.
+  - styles (Object): An object containing CSS property-value pairs.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- gP.setTextStyles(styles)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  - Applies a set of styles to the button's text element.
+  - styles (Object): An object containing CSS property-value pairs.
 
-## Learn More
+- gP.setTheme(theme)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  - Sets the theme for the user interface element.
+  - theme (String): The theme to be applied. Accepts "dark" or "light".
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- gP.hide()
 
-### Code Splitting
+  - Hides the user interface element.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- gP.setEnv(env)
+  - Sets the environment variable.
+  - env (String): The environment variable value.
