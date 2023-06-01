@@ -8,15 +8,21 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       const gP = window.gP;
+      // setup env
       gP.setEnv("dev");
+      const token = "token"; //token loaded from server after making request to gopeer-api
+      gP.setToken(token);
+
+      // auth user
+
       gP.identify({
         userId: "63d831115a2d135bad577b8c",
         firstName: "John",
         lastName: "Doe",
-        organizationId: "643d803c132a3879cbc589da",
       });
-      gP.show();
 
+      // show and position widget
+      gP.show();
       gP.setButtonStyles({ bottom: "50px", right: "calc(50% - 85px)" });
 
       // gP.setPosition({ bottom: 50, right: 500 });
