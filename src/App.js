@@ -10,13 +10,13 @@ function App() {
       const gP = window.gP;
       // setup env
       gP.setEnv("dev");
-      const token = "token"; //token loaded from server after making request to gopeer-api
+      const token = "<token>"; //token loaded from server after making request to gopeer-api
       gP.setToken(token);
 
       // auth user
 
       gP.identify({
-        userId: "63d831115a2d135bad577b8c",
+        userId: "<user-id>",
         firstName: "John",
         lastName: "Doe",
       });

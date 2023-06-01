@@ -17,6 +17,7 @@ To use this script on your website, add this to the index.html file
   - Sets the user data object.
   - providedUserData (Object): The user data to be set.
   - required fields: userId, lastName, firstName
+  - you can also pass `token` field in this object and you won't need to call `setToken` separately
 
 - `gP.setToken(token)`
 
@@ -63,13 +64,13 @@ To use this script on your website, add this to the index.html file
     const gP = window.gP;
     // setup env
     gP.setEnv("dev");
-    const token = "token"; //token loaded from server after making request to gopeer-api
+    const token = "<token>"; //token loaded from server after making request to gopeer-api
     gP.setToken(token);
 
     // auth user
 
     gP.identify({
-      userId: "63d831115a2d135bad577b8c",
+      userId: "<user-id>",
       firstName: "John",
       lastName: "Doe",
     });
