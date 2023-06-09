@@ -12,22 +12,22 @@ To use this script on your website, add this to the index.html file
 
 # Using The Script
 
-In order to use this script, you will need to generate a token. Token can be generated from these endpoints:
+In order to use this script, you will need to generate a token.The token can be generated from these endpoints:
 
 - `POST` https://next.gopeer.org/organizations/identify (production token)
 - `POST` https://dev.gopeer.org/organizations/identify (development token)
 
-These routes need two parameters -> `key` and `orgId`, both of them should be provided inside request's body. Both these values for your organization can be acquired by contacting GoPeer's representative.
+These routes need two parameters -> `key` and `orgId`, both of them should be provided inside the request's body. Both these values for your organization can be acquired by contacting GoPeer's representative.
 
 - `key` - randomly generated string (GoPeer stores hashed version of this string)
 - `orgId` - ObjectId for the organization.
 
-If all required body fields are present and the key is correct, these endpoints will return status code 200 with object as a response body. Object will contain a single field `token`.
+If all required body fields are present and the key is correct, these endpoints will return status code 200 with an object as a response body.The Object will contain a single field `token`.
 
 - code: 200
 - body: { `token`: String }
 
-## After generating development token, make sure to call `gp.setEnv("dev")`
+## After generating the development token, make sure to call `gp.setEnv("dev")`
 
 # API
 
