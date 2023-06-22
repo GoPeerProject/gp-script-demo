@@ -37,11 +37,34 @@ If all required body fields are present and the key is correct, these endpoints 
   - providedUserData (Object): The user data to be set.
   - required fields: userId, lastName, firstName
   - you can also pass `token` field in this object and you won't need to call `setToken` separately
+  - following is the interface for all the expected fields:
+    ```
+    {
+      districtId: string    // [A-Za-z0-9]
+      schoolId: string      // [A-Za-z0-9]
+      courseId: string      // [A-Za-z0-9]
+      schoolName: string    // [A-Za-z0-9- ()%&]
+      courseName: string    // [A-Za-z0-9- ()%&]
+
+      lessonName: string    // [A-Za-z0-9- ]
+      activityName: string  // [A-Za-z0-9- ]
+
+      userId: string      // [A-Za-z0-9]
+      name: string
+      email: string
+      subject: string     // [a-z_]
+    }
+    ```
+    The `userId` and `name` fields are required, while rest of the fields are optional.
 
 - `gP.setToken(token)`
 
   - Sets the token in the user data object.
   - token (string): The token generated after making request to the gopeer-api with organization specific secret (Contact GoPeer representative to get the secret ).
+
+- `gP.launch()`
+
+  - launches GoPeer platform in a new tab. This is usefull when a custom launch button is used.
 
 - `gP.show()`
 
@@ -98,5 +121,10 @@ If all required body fields are present and the key is correct, these endpoints 
     // show and position widget
     gP.show();
     gP.setButtonStyles({ bottom: "50px", right: "calc(50% - 85px)" });
+
+    // redirecting to GoPeer after 10 seconds without waiting for button click
+    setTimeout(() => {
+      gP.launch()
+    }, 10 * 1000)
   }, []);
 ```
