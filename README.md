@@ -53,6 +53,7 @@ If all required body fields are present and the key is correct, these endpoints 
       name: string
       email: string
       subject: string     // [a-z_]
+      grade: string     // elementary | middle | high | [0-9]
     }
     ```
     The `userId` and `name` fields are required, while rest of the fields are optional.
