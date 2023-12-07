@@ -38,6 +38,7 @@ If all required body fields are present and the key is correct, these endpoints 
   - required fields: userId, lastName, firstName
   - you can also pass `token` field in this object and you won't need to call `setToken` separately
   - following is the interface for all the expected fields:
+
     ```
     {
       districtId: string    // [A-Za-z0-9]
@@ -54,8 +55,11 @@ If all required body fields are present and the key is correct, these endpoints 
       email: string
       subject: string     // [a-z_]
       grade: string     // elementary | middle | high | [0-9]
+
+      links: {title:string, url:string, text:string}[]
     }
     ```
+
     The `userId` and `name` fields are required, while rest of the fields are optional.
 
 - `gP.setToken(token)`
@@ -95,6 +99,11 @@ If all required body fields are present and the key is correct, these endpoints 
   - Sets the theme for the user interface element.
   - theme (String): The theme to be applied. Accepts "dark" or "light".
 
+  - `gP.setLinks(links)`
+
+  - Sets provided links in the user data object.
+  - params: `{text: string, url: string, title:string}[]`
+
 - `gP.setEnv(env)`
   - Sets the environment variable.
   - env (String): The environment variable value.
@@ -122,6 +131,10 @@ If all required body fields are present and the key is correct, these endpoints 
     // show and position widget
     gP.show();
     gP.setButtonStyles({ bottom: "50px", right: "calc(50% - 85px)" });
+
+    //setLinks
+    const links = [{title: "Course", url:"https://course.linl", text: "Algebra 101}]
+    gp.setLinks(links)
 
     // redirecting to GoPeer after 10 seconds without waiting for button click
     setTimeout(() => {
