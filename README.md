@@ -27,7 +27,10 @@ If all required body fields are present and the key is correct, these endpoints 
 - code: 200
 - body: { `token`: String }
 
-## After generating the development token, make sure to call `gp.setEnv("dev")`
+
+> :warning: **Token Expires in 30 days,** make sure to renew token once in a month
+
+> :warning: **After generating the development token, set development evn with calling `gp.setEnv("dev")`**
 
 # API
 
