@@ -58,7 +58,7 @@ If all required body fields are present and the key is correct, these endpoints 
       name: string
       email: string
       subject: string     // 'Math' | 'Science' | 'Language Arts' | 'Social Studies' | 'French' | 'Spanish'
-      grade: string     // [0-9]
+      grade: string     // 1-12
 
       links: {title:string, url:string, text:string}[]
     }
