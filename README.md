@@ -30,6 +30,8 @@ If all required body fields are present and the key is correct, these endpoints 
 
 > :warning: **Token Expires in 30 days,** make sure to renew token once in a month
 
+> :warning: Token should be generated on the **backend** and stored for up to a month
+
 > :warning: **After generating the development token, set development evn with calling `gp.setEnv("dev")`**
 
 # API
@@ -56,7 +58,7 @@ If all required body fields are present and the key is correct, these endpoints 
       name: string
       email: string
       subject: string     // 'Math' | 'Science' | 'Language Arts' | 'Social Studies' | 'French' | 'Spanish'
-      grade: string     // elementary | middle | high | [0-9]
+      grade: string     // [0-9]
 
       links: {title:string, url:string, text:string}[]
     }
