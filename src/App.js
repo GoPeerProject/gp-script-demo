@@ -4,6 +4,8 @@ import logo from './logo.svg'
 import './App.css'
 
 let theme = 'dark'
+const userId = '198374578'
+const name = 'John Doe'
 
 function App() {
   const [org, setOrg] = useState('')
@@ -45,19 +47,15 @@ function App() {
     gP.setToken(token)
 
     // auth user
-    gP.identify({
-      userId: '12345678',
-      firstName: 'John',
-      lastName: 'Doe'
-    })
+    gP.identify({ userId, name })
 
     // Optional (but HIGHLY recommended): send along a link to the
     // student's material that the tutor can access
     gP.setLinks([
       {
-        text: 'link to students gradebook page',
-        title: 'Gradebook',
-        url: 'https://r19.core.learn.edgenuity.com/Educator/StudentTools/Gradebook.aspx?deeplink=true&courseID=3fe068f7-2019-428b-840a-bb93913251e6&stuId=206465686&lmsSchId=18152'
+        text: 'Test Link',
+        title: 'Title',
+        url: 'https://edgenuity.com'
       }
     ])
 
@@ -73,7 +71,7 @@ function App() {
   const sendEvent = async () => {
     try {
       const res = await axios.post(
-        `https://dev.gopeer.org/users/event?userId=12345678&type=entered_assessment&token=${token}`
+        `https://dev.gopeer.org/users/event?userId=${userId}&type=entered_assessment&token=${token}`
       )
       console.log(res)
     } catch (e) {
