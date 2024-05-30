@@ -1,50 +1,130 @@
-import logo from "./logo.svg";
-import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import logo from './logo.svg'
+import './App.css'
 
-let theme = "dark";
+let theme = 'dark'
+const userId = '198374578'
+const name = 'John Doe'
 
 function App() {
+  const [org, setOrg] = useState('')
+  const [key, setKey] = useState('')
+  const [token, setToken] = useState('')
+  const [launched, setLaunched] = useState(false)
+
+  // Org id and key are stored in localStorage, just enter your
+  // credentials in the inputs when you run 'npm start'
   useEffect(() => {
-    setTimeout(() => {
-      const gP = window.gP;
-      // setup env
-      gP.setEnv("dev");
-      const token = "<token>"; //token loaded from server after making request to gopeer-api
-      gP.setToken(token);
+    const gpPmid = localStorage.getItem('gp-pmid') ?? ''
+    const gpKey = localStorage.getItem('gp-key') ?? ''
+    if (gpPmid !== org) setOrg(gpPmid)
+    if (gpKey !== key) setKey(gpKey)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-      // auth user
+  // Fetch the token from the GoPeer API
+  // NOTE: This token should not be retrieved on the front-end,
+  // this is just an example
+  const loadToken = async () => {
+    try {
+      const res = await axios.post(
+        'https://dev.gopeer.org/organizations/identify',
+        { orgId: org, key }
+      )
+      setToken(res.data.token)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
-      gP.identify({
-        userId: "<user-id>",
-        firstName: "John",
-        lastName: "Doe",
-      });
+  // This logic (aside from launch()) can be done before the button
+  // click itself, it is setup like this here for testing purposes
+  const launch = () => {
+    const gP = window.gP
+    // set environment and token
+    gP.setEnv('dev')
+    gP.setToken(token)
 
-      // show and position widget
-      gP.show();
-      gP.setButtonStyles({ bottom: "50px", right: "calc(50% - 85px)" });
+    // auth user
+    gP.identify({ userId, name })
 
-      // gP.setPosition({ bottom: 50, right: 500 });
-    }, 1000);
-  }, []);
+    // Optional (but HIGHLY recommended): send along a link to the
+    // student's material that the tutor can access
+    gP.setLinks([
+      {
+        text: 'Test Link',
+        title: 'Title',
+        url: 'https://edgenuity.com'
+      }
+    ])
+
+    // launch() only needs to be used with a custom button
+    // if using show(), you do not need to do this
+    gP.launch()
+    setLaunched(true)
+  }
+
+  // If the student enters an exam/assessment, it is very simple to
+  // notify GoPeer that they have done so, you just need the same
+  // user Id you auth'd them with originally and the same API token
+  const sendEvent = async () => {
+    try {
+      const res = await axios.post(
+        `https://dev.gopeer.org/users/event?userId=${userId}&type=entered_assessment&token=${token}`
+      )
+      console.log(res)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className='App'>
+      <header className='App-header'>
         <div
           onClick={() => {
-            const nextTheme = theme === "dark" ? "light" : "dark";
+            const nextTheme = theme === 'dark' ? 'light' : 'dark'
 
-            window.gP.setTheme(nextTheme);
-            theme = nextTheme;
+            window.gP.setTheme(nextTheme)
+            theme = nextTheme
           }}
         >
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className='App-logo' alt='logo' />
         </div>
       </header>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 15,
+          alignItems: 'center'
+        }}
+      >
+        Platform
+        <input
+          placeholder='Set platform'
+          value={org}
+          onChange={(e) => {
+            setOrg(e.target.value)
+            localStorage.setItem('gp-pmid', e.target.value)
+          }}
+        />
+        Key
+        <input
+          placeholder='Set key'
+          value={key}
+          onChange={(e) => {
+            setKey(e.target.value)
+            localStorage.setItem('gp-key', e.target.value)
+          }}
+        />
+        <button onClick={loadToken}>Load Token</button>
+        {token && <button onClick={launch}>Launch</button>}
+        {launched && <button onClick={sendEvent}>Send Event</button>}
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
